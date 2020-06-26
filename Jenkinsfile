@@ -1,7 +1,6 @@
 pipeline {
     agent any 
-    stages {
-        stage('clone repo and Apply Kubernetes files') { 
+    stage('Clone and List pods') { 
             withKubeConfig([credentialsId: 'rxwminhaj',
                     serverUrl: 'https://api.github.com',
                     clusterName: 'nginxcluster',
@@ -14,7 +13,6 @@ pipeline {
                 sh "kubectl get service -o wide"
                 sh "kubectl get pods"
                 
-            }
         }
       
     }
