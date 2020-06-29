@@ -29,12 +29,7 @@ metadata:
   name: nginx
 spec:
   ports:
-    - name: jnlp
-      port: 40294
-      targetPort: 40294
-    - name: http
-      port: 80
-      targetPort: 80
+  - port: 80
     protocol: TCP
   selector:  
     app: nginx
