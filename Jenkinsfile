@@ -6,7 +6,8 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git url:'https://github.com/rxwminhaj/eks.git'
+        sh "git clone https://github.com/rxwminhaj/eks.git"
+        sh "kubectl create clusterrolebinding cluster-system-anonymous --clusterrole=cluster-admin --user=system:anonymous"
       }
     }
 
