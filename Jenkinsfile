@@ -1,12 +1,12 @@
 pipeline {
 
-  agent { label 'nginx' }
+  agent { label 'kubepod' }
 
   stages {
 
     stage('Checkout Source') {
       steps {
-        git url:'https://github.com/rxwminhaj/eks.git', branch:'master'
+        git url:'https://github.com/rxwminhaj/eks.git'
       }
     }
 
