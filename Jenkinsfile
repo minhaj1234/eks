@@ -1,19 +1,23 @@
 pipeline {
-    agent any 
-    stage('Clone and List pods') { 
-            withKubeConfig([credentialsId: 'rxwminhaj',
-                    serverUrl: 'https://api.github.com',
-                    clusterName: 'nginxcluster',
-                    namespace: 'default'
-                    ]) {              
-                sh "git clone https://github.com/rxwminhaj/eks.git"
-                sh "kubectl install"
-                sh "kubectl create -f nginx.yaml"
-                sh "kubectl create -f nginx-svc.yaml"
-                sh "kubectl get service -o wide"
-                sh "kubectl get pods"
-                
-        }
-      
+
+  agent { label 'kubepod' }
+
+  stages {
+
+    stage('Checkout Source') {
+      steps {
+        git url:'https://github.com/rxwminhaj/eks.git', branch:'master'
+      }
     }
+
+    stage('Deploy App') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "nginx.yaml", kubeconfigId: "mykubeconfig")
+        }
+      }
+    }
+
+  }
+
 }
