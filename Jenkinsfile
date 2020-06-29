@@ -1,6 +1,6 @@
 pipeline {
 
-  agent { label 'testpod' }
+  agent { label 'nginx' }
 
   stages {
 
